@@ -1,1 +1,13 @@
-<p>app-shell works!</p>
+<mat-toolbar>
+  <span>Paginacao por Demanda</span>
+  <span class="spacer"></span>
+
+  <a mat-button routerLink="/processos" routerLinkActive="active-link">Processos</a>
+  <a mat-button routerLink="/memoria-fisica" routerLinkActive="active-link">Memoria Fisica</a>
+  <a mat-button routerLink="/memoria-logica" routerLinkActive="active-link">Memoria Logica</a>
+  <a mat-button routerLink="/disco" routerLinkActive="active-link">Disco</a>
+</mat-toolbar>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>{{ processo.nome }}</h2>
+
+<mat-dialog-content>
+  <p>{{ processo.descricao }}</p>
+
+  <div class="grid">
+    <div>
+      <span class="label">ID</span>
+      <strong>{{ processo.id }}</strong>
+    </div>
+
+    <div>
+      <span class="label">Status</span>
+      <mat-chip>{{ processo.status }}</mat-chip>
+    </div>
+
+    <div>
+      <span class="label">Prioridade</span>
+      <strong>{{ processo.prioridade }}</strong>
+    </div>
+
+    <div>
+      <span class="label">Paginas</span>
+      <strong>{{ processo.paginas }}</strong>
+    </div>
+
+    <div>
+      <span class="label">Memoria</span>
+      <strong>{{ processo.memoriaMb }} MB</strong>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>
+

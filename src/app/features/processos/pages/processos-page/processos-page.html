@@ -1,1 +1,79 @@
-<p>processos-page works!</p>
+<section class="processos-page">
+  <h1>Processos</h1>
+
+  <div class="kpis">
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Total</span>
+      <strong>{{ kpis.total }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Ativos</span>
+      <strong>{{ kpis.ativos }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Bloqueados</span>
+      <strong>{{ kpis.bloqueados }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Memoria Total</span>
+      <strong>{{ kpis.memoriaTotalMb }} MB</strong>
+    </mat-card>
+  </div>
+
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Filtrar processos</mat-label>
+    <input matInput placeholder="Nome, status, prioridade..." (input)="applyFilter($any($event.target).value)" />
+  </mat-form-field>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let processo">{{ processo.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>Nome</th>
+        <td mat-cell *matCellDef="let processo">{{ processo.nome }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let processo">
+          <mat-chip [class]="'status-chip status-' + processo.status.toLowerCase()">{{ processo.status }}</mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="prioridade">
+        <th mat-header-cell *matHeaderCellDef>Prioridade</th>
+        <td mat-cell *matCellDef="let processo">{{ processo.prioridade }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="paginas">
+        <th mat-header-cell *matHeaderCellDef>Paginas</th>
+        <td mat-cell *matCellDef="let processo">{{ processo.paginas }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="memoriaMb">
+        <th mat-header-cell *matHeaderCellDef>Memoria</th>
+        <td mat-cell *matCellDef="let processo">{{ processo.memoriaMb }} MB</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Acoes</th>
+        <td mat-cell *matCellDef="let processo">
+          <button mat-stroked-button type="button" (click)="openDetails(processo)">
+            <mat-icon>visibility</mat-icon>
+            Detalhes
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</section>

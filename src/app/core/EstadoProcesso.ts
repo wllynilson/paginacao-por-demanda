@@ -1,0 +1,6 @@
+export enum EstadoProcesso {
+  ABERTO = 'ABERTO',
+  EM_EXECUCAO = 'EM_EXECUCAO',
+  BLOQUEADO = 'BLOQUEADO',
+  FINALIZADO = 'FINALIZADO'
+}
