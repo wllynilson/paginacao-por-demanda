@@ -1,1 +1,75 @@
-<p>memoria-fisica-page works!</p>
+<section class="memoria-fisica-page">
+  <h1>Memória Física</h1>
+
+  <div class="kpis">
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Total de quadros</span>
+      <strong>{{ kpis.total }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Ocupados</span>
+      <strong>{{ kpis.ocupados }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Livres</span>
+      <strong>{{ kpis.livres }}</strong>
+    </mat-card>
+  </div>
+
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Filtrar quadros</mat-label>
+    <input
+      matInput
+      placeholder="Status, PID, processo..."
+      (input)="applyFilter($any($event.target).value)"
+    />
+  </mat-form-field>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="indice">
+        <th mat-header-cell *matHeaderCellDef>Quadro</th>
+        <td mat-cell *matCellDef="let quadro">{{ quadro.indice }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let quadro">
+          <mat-chip [class]="'status-chip status-' + quadro.status.toLowerCase()">
+            {{ quadro.status }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pid">
+        <th mat-header-cell *matHeaderCellDef>PID</th>
+        <td mat-cell *matCellDef="let quadro">{{ quadro.pid ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="processo">
+        <th mat-header-cell *matHeaderCellDef>Processo</th>
+        <td mat-cell *matCellDef="let quadro">{{ quadro.processo ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pagina">
+        <th mat-header-cell *matHeaderCellDef>Página</th>
+        <td mat-cell *matCellDef="let quadro">{{ quadro.pagina ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let quadro">
+          <button mat-stroked-button type="button" (click)="openDetails(quadro)">
+            <mat-icon>visibility</mat-icon>
+            Detalhes
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</section>

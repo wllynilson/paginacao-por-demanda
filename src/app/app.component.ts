@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { AppShell } from './core/layout/app-shell/app-shell';
+import {Component} from '@angular/core';
+import {MatButton, MatButtonModule} from '@angular/material/button';
+import {MatToolbar, MatToolbarModule} from '@angular/material/toolbar';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [AppShell],
+  imports: [MatToolbarModule, MatButtonModule, RouterOutlet, RouterLink, RouterLinkActive, MatButton, MatToolbar, RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'paginacao-por-demanda';
+  title = 'Paginacao por Demanda';
 }

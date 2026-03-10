@@ -1,1 +1,69 @@
-<p>disco-page works!</p>
+<section class="disco-page">
+  <h1>Disco</h1>
+
+  <div class="kpis">
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Total</span>
+      <strong>{{ kpis.total }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Swap</span>
+      <strong>{{ kpis.swap }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Arquivos</span>
+      <strong>{{ kpis.arquivos }}</strong>
+    </mat-card>
+  </div>
+
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Filtrar</mat-label>
+    <input matInput placeholder="Tipo, dono, PID..." (input)="applyFilter($any($event.target).value)" />
+  </mat-form-field>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="bloco">
+        <th mat-header-cell *matHeaderCellDef>Bloco</th>
+        <td mat-cell *matCellDef="let row">{{ row.bloco }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="tipo">
+        <th mat-header-cell *matHeaderCellDef>Tipo</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [class]="'status-chip status-' + row.tipo.toLowerCase()">{{ row.tipo }}</mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dono">
+        <th mat-header-cell *matHeaderCellDef>Dono</th>
+        <td mat-cell *matCellDef="let row">{{ row.dono ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pid">
+        <th mat-header-cell *matHeaderCellDef>PID</th>
+        <td mat-cell *matCellDef="let row">{{ row.pid ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pagina">
+        <th mat-header-cell *matHeaderCellDef>Página</th>
+        <td mat-cell *matCellDef="let row">{{ row.pagina ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-stroked-button type="button" (click)="openDetails(row)">
+            <mat-icon>visibility</mat-icon>
+            Detalhes
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</section>

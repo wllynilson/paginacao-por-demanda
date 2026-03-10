@@ -5,7 +5,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-app-shell',
-  imports: [MatToolbarModule, MatButtonModule, RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [],
   templateUrl: './app-shell.html',
   styleUrl: './app-shell.scss'
 })

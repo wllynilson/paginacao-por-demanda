@@ -1,1 +1,80 @@
-<p>memoria-logica-page works!</p>
+<section class="memoria-logica-page">
+  <h1>Memória Lógica</h1>
+
+  <div class="kpis">
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Total de páginas</span>
+      <strong>{{ kpis.total }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">Na RAM</span>
+      <strong>{{ kpis.naRam }}</strong>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <span class="kpi-label">No disco</span>
+      <strong>{{ kpis.noDisco }}</strong>
+    </mat-card>
+  </div>
+
+  <mat-form-field appearance="outline" class="filter-field">
+    <mat-label>Filtrar páginas</mat-label>
+    <input
+      matInput
+      placeholder="PID, processo, status..."
+      (input)="applyFilter($any($event.target).value)"
+    />
+  </mat-form-field>
+
+  <div class="table-container">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="pid">
+        <th mat-header-cell *matHeaderCellDef>PID</th>
+        <td mat-cell *matCellDef="let row">{{ row.pid }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="processo">
+        <th mat-header-cell *matHeaderCellDef>Processo</th>
+        <td mat-cell *matCellDef="let row">{{ row.processo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pagina">
+        <th mat-header-cell *matHeaderCellDef>Página</th>
+        <td mat-cell *matCellDef="let row">{{ row.pagina }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip [class]="'status-chip status-' + row.status.toLowerCase()">
+            {{ row.status }}
+          </mat-chip>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quadro">
+        <th mat-header-cell *matHeaderCellDef>Quadro (RAM)</th>
+        <td mat-cell *matCellDef="let row">{{ row.quadro ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="blocoDisco">
+        <th mat-header-cell *matHeaderCellDef>Bloco (Disco)</th>
+        <td mat-cell *matCellDef="let row">{{ row.blocoDisco ?? '-' }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef>Ações</th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-stroked-button type="button" (click)="openDetails(row)">
+            <mat-icon>visibility</mat-icon>
+            Detalhes
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</section>
